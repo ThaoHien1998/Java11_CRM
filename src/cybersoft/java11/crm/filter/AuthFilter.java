@@ -12,6 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import cybersoft.java11.crm.utils.URLContants;
+
 @WebFilter(urlPatterns="/*")
 public class AuthFilter implements Filter{
 
@@ -25,9 +27,14 @@ public class AuthFilter implements Filter{
 		//check authentication
 		HttpSession session = req.getSession();
 		String userId = (String)session.getAttribute("userID");
-		
-	 
+		if(userId != null) {
 			chain.doFilter(request, response);
+		} else {
+			if(req.getServletPath().equals(URLContants.AUTH_LOGIN) || req.getServletPath().startsWith("/assets/"))
+				chain.doFilter(request, response);
+			else
+				resp.sendRedirect(req.getContextPath() + URLContants.AUTH_LOGIN);
+		}
 	}
 
 }

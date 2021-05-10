@@ -6,17 +6,19 @@ public class User {
 	private String password;
 	private String fullname;
 	private String phone;
+	private String address;
 	private Role role;
 	
 	
 	
-	public User(int id, String email, String password, String fullname, String phone, Role role) {
+	public User(int id, String email, String password, String fullname,String address, String phone, Role role) {
 		super();
 		this.id = id;
 		this.email = email;
 		this.password = password;
 		this.fullname = fullname;
 		this.phone = phone;
+		this.address = address;
 		this.role = role;
 	}
 	public User() {
@@ -26,6 +28,7 @@ public class User {
 		this.password = "" ;
 		this.fullname = "";
 		this.phone = "";
+		this.address = "";
 		this.role = null;
 	}
 	
@@ -66,6 +69,12 @@ public class User {
 	}
 	public void setRole(Role role) {
 		this.role = role;
+	}
+	public String getAddress() {
+		return address;
+	}
+	public void setAddress(String address) {
+		this.address = address;
 	}
 	
 	

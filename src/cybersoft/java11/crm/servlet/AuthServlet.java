@@ -11,11 +11,13 @@ import javax.servlet.http.HttpSession;
 
 import cybersoft.java11.crm.biz.AuthBiz;
 import cybersoft.java11.crm.model.User;
+import cybersoft.java11.crm.utils.JSPPathConst;
+import cybersoft.java11.crm.utils.URLContants;
 
 @WebServlet(name="authSevlet",urlPatterns= {
-		"/login",
-		"/logout",
-		"/register"}
+		URLContants.AUTH_LOGIN,
+		URLContants.AUTH_LOGOUT,
+		URLContants.AUTH_REGISTER}
 )
 public class AuthServlet extends HttpServlet {
 	AuthBiz biz;
@@ -33,15 +35,15 @@ public class AuthServlet extends HttpServlet {
 		String path = req.getServletPath();
 		
 		switch (path) {
-		case "/login":
-			
+		case URLContants.AUTH_LOGIN:
+			req.getRequestDispatcher(JSPPathConst.LOGIN).forward(req, resp);
 			break;
 
 		default:
 			break;
 		}
 	
-		req.getRequestDispatcher("/WEB-INF/Auth/login.jsp").forward(req, resp);
+		
 	}
 	
 	@Override
@@ -57,16 +59,16 @@ public class AuthServlet extends HttpServlet {
 			System.out.printf("password: %s\n",password);
 			
 			User user = biz.login(email, password);
+
 			
 			HttpSession session = req.getSession();
 			session.setAttribute("userID", ""+user.getId());
 			session.setMaxInactiveInterval(120);
 			
-			if (user != null) { // logged in successfully
-				resp.sendRedirect(req.getContextPath()+"/home");
-			}
+			if (user != null)// logged in successfully
+				resp.sendRedirect(req.getContextPath()+URLContants.HOME);
 			else
-				req.getRequestDispatcher("/WEB-INF/Auth/login.jsp").forward(req, resp);
+				req.getRequestDispatcher(JSPPathConst.LOGIN).forward(req, resp);
 			break;
 
 		default:

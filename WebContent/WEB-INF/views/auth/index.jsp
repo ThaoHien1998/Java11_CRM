@@ -1,3 +1,4 @@
+<%@page import="cybersoft.java11.crm.utils.URLContants"%>
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
 <!DOCTYPE html>
@@ -44,11 +45,11 @@
         <h4 class="m-0">Welcome back!</h4>
         <p class="mb-5">Login to access your account </p>
 
-        <form method="POST" action="<%=request.getContextPath()%>/login" novalidate>
+        <form method = "POST" action="<%= request.getContextPath()+URLContants.AUTH_LOGIN %>" novalidate>
             <div class="form-group">
                 <label class="text-label" for="email_2">Email Address:</label>
                 <div class="input-group input-group-merge">
-                    <input name ="email" id="email_2" type="email" required="" class="form-control form-control-prepended" placeholder="tranthaohien.1998@gmail.com">
+                    <input name="email" id="email_2" type="email" required="" class="form-control form-control-prepended" placeholder="john@doe.com">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
                             <span class="far fa-envelope"></span>
@@ -59,7 +60,7 @@
             <div class="form-group">
                 <label class="text-label" for="password_2">Password:</label>
                 <div class="input-group input-group-merge">
-                    <input name ="password" id="password_2" type="password" required="" class="form-control form-control-prepended" placeholder="Enter your password">
+                    <input name="password" id="password_2" type="password" required="" class="form-control form-control-prepended" placeholder="Enter your password">
                     <div class="input-group-prepend">
                         <div class="input-group-text">
                             <span class="fa fa-key"></span>

@@ -21,13 +21,15 @@ public class AuthDao {
 			preparedStatement.setString(1, email);
 			preparedStatement.setString(2, password);
 			ResultSet result = preparedStatement.executeQuery();
-			
+
 			while(result.next()) {
 				user = new User();
 				user.setId(result.getInt("id"));
-				user.setEmail(result.getString("email"));
+				user.setEmail(email);
 				user.setFullname(result.getString("fullname"));
+				user.setAddress(result.getString("address"));
 				user.setPhone(result.getString("phone"));
+
 			}
 			
 		} catch (SQLException e) {
@@ -37,7 +39,6 @@ public class AuthDao {
 		}finally {
 			connection.close();
 		}
-		
 		
 		return user;
 	}
